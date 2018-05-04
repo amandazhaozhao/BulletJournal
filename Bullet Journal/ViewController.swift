@@ -8,18 +8,30 @@
 
 import UIKit
 
+
 class ViewController: UIViewController {
 
+    var imagePicker = UIImagePickerController()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(swipeAction(swipe:)))
+        swipeUp.direction = UISwipeGestureRecognizerDirection.up
+        self.view.addGestureRecognizer(swipeUp)
+        
+    }
+    
+    @IBAction func mainPageSwipedUp(_ sender: UISwipeGestureRecognizer) {
+        performSegue(withIdentifier: "FirstTableViewController", sender: self)
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+}
+
+
+extension UIViewController {
+    @objc func swipeAction(swipe: UISwipeGestureRecognizer) {
+        performSegue(withIdentifier: "nextPage", sender: self)
     }
-
-
 }
 
